@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'business#show'
+  root to: 'businesses#index'
 
   resource :business
 
