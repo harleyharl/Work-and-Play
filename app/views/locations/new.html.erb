@@ -1,0 +1,25 @@
+<% if @location.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@location.errors.count, "error") %>
+      prohibited this business from being saved:
+    </h2>
+
+    <ul>
+    <% @location.errors.full_messages.each do |msg| %>
+      <li> <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<h3>Add a new location:</h3>
+<%= form_for ([@business, @location]) do |f|%>
+  <%= f.label(:name, "Location name:")%>
+  <%= f.text_field :name %><br />
+  <%= f.label(:address, "Address:")%>
+  <%= f.text_area :address %><br />
+  <%= f.hidden_field :business_id, value: @business.id %>
+  <%= f.submit "Create New Location"%>
+<% end %>

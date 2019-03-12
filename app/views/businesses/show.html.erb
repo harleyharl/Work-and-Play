@@ -1,0 +1,12 @@
+<h1><%= @business.name %></h1>
+
+<h2>Your locations: </h2>
+<ul>
+<% @business.locations.each do |location| %>
+  <h3><li><%= link_to location.name, business_location_path(@business, location) %></li></h3>
+  <%= location.address %>
+<% end %>
+</ul>
+
+<%= link_to "Add a new location", new_location_path %><br />
+<%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %>

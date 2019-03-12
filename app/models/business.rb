@@ -5,4 +5,5 @@ class Business < ApplicationRecord
   has_many :locations
   has_many :playlists
 
+
 end

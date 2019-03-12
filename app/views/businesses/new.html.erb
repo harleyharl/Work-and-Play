@@ -1,0 +1,30 @@
+<h1>Sign Up For Work n Play here:</h1>
+
+<% if @business.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@business.errors.count, "error") %>
+      prohibited this business from being saved:
+    </h2>
+
+    <ul>
+    <% @business.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @business, url: business_path(@business) do |f| %>
+
+  <%= f.label(:name, "Business name:")%>
+  <%= f.text_field :name %><br />
+  <%= f.label(:email_address, "Email Address:")%>
+  <%= f.text_field :email_address %><br />
+  <%= f.label(:password, "Choose a password:")%>
+  <%= f.password_field :password %><br />
+  <%= f.label(:password_confirmation, "Confirm your password:")%>
+  <%= f.password_field :password_confirmation %><br />
+  <%= f.submit "Create Your Account:" %>
+
+<% end %>
