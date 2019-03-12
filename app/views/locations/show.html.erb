@@ -1,1 +1,3 @@
-<h1>Schedule Your playlist for <%= @location.name %></h1>
+<h1><%= @location.name %></h1>
+
+<%= link_to "Import a playlist from spotify", new_location_playlist_path(@location) %>

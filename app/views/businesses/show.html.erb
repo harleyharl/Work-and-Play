@@ -9,4 +9,5 @@
 </ul>
 
 <%= link_to "Add a new location", new_location_path %><br />
-<%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %>
+
+<%= link_to('Logout', logout_path, method: :post)%>
