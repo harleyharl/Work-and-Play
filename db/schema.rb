@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_051127) do
+ActiveRecord::Schema.define(version: 2019_03_14_203359) do
 
   create_table "LocationPlaylists", force: :cascade do |t|
     t.integer "location_id"
@@ -34,10 +34,18 @@ ActiveRecord::Schema.define(version: 2019_03_12_051127) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "business_id"
+    t.string "state"
   end
 
   create_table "playlists", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "spotify_users", force: :cascade do |t|
+    t.string "name"
+    t.string "email_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

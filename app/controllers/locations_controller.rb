@@ -1,5 +1,13 @@
 class LocationsController < ApplicationController
 
+  def index
+    if !session[:business_id].blank?
+      @business = Business.find_by(id: session[:business_id])
+    else
+      redirect_to new_session_path
+    end
+  end
+
   def new
     @business = Business.find_by(id: session[:business_id])
     @location = Location.new
@@ -10,7 +18,7 @@ class LocationsController < ApplicationController
     @business = Business.find_by(id: session[:business_id])
     @location = Location.new(location_params)
     if @location.save
-      redirect_to business_path(@location.business)
+      redirect_to business_locations_path(@business)
     else
       render :new
     end
@@ -24,6 +32,6 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:name, :address, :business_id)
+    params.require(:location).permit(:name, :address, :state, :business_id)
   end
 end
