@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_062259) do
+ActiveRecord::Schema.define(version: 2019_03_12_051127) do
 
   create_table "LocationPlaylists", force: :cascade do |t|
     t.integer "location_id"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2019_03_10_062259) do
 
   create_table "playlists", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "uid"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

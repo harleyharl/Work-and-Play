@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-
   root to: 'businesses#index'
 
   resources :sessions
 
   post 'logout' => 'sessions#destroy'
+
+  get '/auth/spotify/callback' => 'businesses#spotify'
+
+  # get 'https://api.spotify.com/v1/users/#{@business_id}/playlists'
 
   resources :businesses
 

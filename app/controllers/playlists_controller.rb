@@ -1,5 +1,16 @@
 class PlaylistsController < ApplicationController
   def new
-    #hi
+    # RSpotify.authenticate(ENV['CLIENT_ID'], ENV['CLIENT_SECRET'])
+    # @party = RSpotify::Category.find('party')
+    # @arctic_monkeys = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
+  end
+
+  def create
+    # RSpotify.authenticate(ENV['CLIENT_ID'], ENV['CLIENT_SECRET'])
+  end
+
+  def show
+    #sessions create used to point here!
+    # RSpotify.authenticate(ENV['CLIENT_ID'], ENV['CLIENT_SECRET'])
   end
 end

@@ -5,6 +5,12 @@ ruby '2.3.3'
 
 gem 'pry'
 
+gem 'omniauth'
+
+gem 'omniauth-spotify'
+
+gem 'dotenv-rails'
+
 gem 'rspotify'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
