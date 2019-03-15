@@ -3,7 +3,7 @@ class BusinessesController < ApplicationController
   def index
     if !session[:business_id].blank?
       @business = Business.find_by(id: session[:business_id])
-      redirect_to business_path(@business)
+      redirect_to business_locations_path(@business)
     else
       redirect_to new_session_path
     end

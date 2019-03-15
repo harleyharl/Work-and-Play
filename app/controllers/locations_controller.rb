@@ -29,6 +29,12 @@ class LocationsController < ApplicationController
     @location = Location.find_by(id: params[:id])
   end
 
+  def destroy
+    @location = Location.find(params[:id])
+    @location.destroy
+    redirect_to root_path
+  end
+
   private
 
   def location_params

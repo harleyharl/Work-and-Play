@@ -1,5 +1,7 @@
-<h1>Your business locations:</h1>
+<h1>Welcome to Work and Play</h1>
 
+
+<h2>Whats playing now at your locations:</h2>
 <div>
   <h3>Filter locations by state:</h3>
   <%= form_tag("/locations", method: "get") do %>
@@ -13,18 +15,21 @@
 <ul>
 <% @locations.each do |location| %>
   <h3><li><%= link_to location.name, location_path(location) %></li></h3>
-  <%= location.address %>
+  <%= location.address %><br />
+  <%= link_to 'Delete', location_path(location), method: :delete %>
 <% end %>
 </ul>
 <%else%>
 <ul>
 <% @business.locations.each do |location| %>
   <h3><li><%= link_to location.name, location_path(location) %></li></h3>
-  <%= location.address %>
+  <%= location.address %>, <%= location.state %> <br />
+  <%= link_to 'Delete', location_path(location), method: :delete %>
 <% end %>
 </ul>
 <%end%>
 
+<%= link_to "Show all locations", business_locations_path(@business) %><br />
 <%= link_to "Add a new location", new_location_path %><br />
 
 <%= link_to('Logout', logout_path, method: :post)%>
