@@ -27,8 +27,17 @@ class SessionsController < ApplicationController
   end
 
   def spotify
-    @business = Business.find_by(email_address: auth[:info][:email])
+    binding.pry
+    @business = Business.find_by(email_address: auth[:info][:email]) #email the user signed up with must match email they use with spotify!
     session[:business_id] = @business.id
+
+    @spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
+    # @spotify_user.to_hash
+    ["birthdate","country","display_name","email","followers","images","product","external_urls","href","id","type","uri","credentials"]
+    # Then recover the Spotify user whenever you like
+    @spotify_user = RSpotify::User.new(hash)
+
+
     redirect_to business_locations_path(@business)
   end
 

@@ -14,7 +14,6 @@ class LocationsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @business = Business.find_by(id: session[:business_id])
     @location = Location.new(location_params)
     if @location.save

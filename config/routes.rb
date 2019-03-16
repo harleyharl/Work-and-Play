@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   post 'logout' => 'sessions#destroy'
 
-  get '/auth/spotify/callback' => 'sessions#spotify'
+  get '/auth/spotify/callback' => 'businesses#spotify_user'
 
   # get 'https://api.spotify.com/v1/users/#{@business_id}/playlists'
 
