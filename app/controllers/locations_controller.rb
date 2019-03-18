@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
 
   def index
+    # binding.pry
     if !session[:business_id].blank?
       @business = Business.find_by(id: session[:business_id])
     else

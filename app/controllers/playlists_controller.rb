@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
-  def new
+  def index
+    @business = Business.find_by(id: session[:business_id])
     # RSpotify.authenticate(ENV['CLIENT_ID'], ENV['CLIENT_SECRET'])
     # @party = RSpotify::Category.find('party')
     # @arctic_monkeys = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')

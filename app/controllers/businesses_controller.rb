@@ -11,24 +11,27 @@ class BusinessesController < ApplicationController
 
   def spotify_user
     # binding.pry
-    spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
-    @business = Business.find_or_create_by(id: spotify_user.id) do |b|
-      b.email_address = spotify_user.email
-      b.name = spotify_user.display_name
+    spotify_user = RSpotify::User.new(request.env['omniauth.auth']) #stores user's spotify data as spotify_user
+    @business = Business.find_or_create_by(email_address: spotify_user.email) do |b| #finds or creates new business object using spotify id
+      # b.email_address = spotify_user.email #sets business' email as spotify email
+      b.name = spotify_user.display_name #sets business' name as spotify name
+      b.uid = spotify_user.id
     end
-    # binding.pry
-    @business.playlists = spotify_user.playlists.each do |playlist|
-      s_playlist = Playlist.new(name: playlist.name)
-      s_playlist.business = @business
-      s_playlist.save
-        playlist.tracks.each do |track|
-          song = Song.new(name: track.name, artist: track.artists.first.name)
-          s_playlist.songs << song
-          s_playlist.save
+
+    spotify_user.playlists.each do |playlist| #begins iteration over each of spotify_user's playlist objects and
+      s_playlist = Playlist.new(name: playlist.name.to_s) #creates a new Playlist for each object
+      s_playlist.business = @business #associates the Playlist with the business
+      s_playlist.save #saves the Playlist object
+        playlist.tracks.each do |track| #iterates over each track in the playlist
+          song = Song.new(name: track.name, artist: track.artists.first.name) #creates a new Song object for each track in the playlist
+          song.playlist = s_playlist #saves the song in the newly created playlist object
+          s_playlist.songs << song #saves the song in the newly created playlist object
+          s_playlist.save #saves the playlist
         end
       end
-      binding.pry
-    session[:id] = @business.id
+      # binding.pry
+    @business.save
+    session[:business_id] = @business.id
     redirect_to business_locations_path(@business)
   end
 

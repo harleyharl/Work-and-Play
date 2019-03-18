@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :locations do
-    resources :playlists
+    resources :playlists, :only => [:show]
   end
 
   resources :playlists
