@@ -5,5 +5,6 @@ class Location < ApplicationRecord
   belongs_to :business
   has_many :location_playlists
   has_many :playlists, through: :location_playlists
+  accepts_nested_attributes_for :playlists
 
 end

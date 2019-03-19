@@ -11,7 +11,12 @@ class LocationsController < ApplicationController
 
   def new
     @business = Business.find_by(id: session[:business_id])
-    @location = Location.new
+    # @location = Location.find_by(id: session[:location_id])
+    # @location.playlists.build(time_slot: 1)
+    # @location.playlists.build(time_slot: 2)
+    # @location.playlists.build(time_slot: 3)
+    # @location.playlists.build(time_slot: 4)
+    # @location.playlists.build(time_slot: 5)
   end
 
   def create
@@ -27,7 +32,14 @@ class LocationsController < ApplicationController
   def show
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find_by(id: params[:id])
-    @playlist = Playlist.new
+    # @playlist = Playlist.new
+    @location.playlists.build
+  end
+
+  def update
+    binding.pry
+    @business = Business.find_by(id: session[:business_id])
+    @location = Location.find_by(id: params[:id])
   end
 
   def destroy
