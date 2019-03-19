@@ -23,6 +23,12 @@
 <ul>
 <% @business.locations.each do |location| %>
   <h3><li><%= link_to location.name, location_path(location) %></li></h3>
+  <h4>Playlist Schedule:</h4>
+  6am - 9am<br /> <%= location.playlists[0] %>
+  9am - 12noon<br /> <%= location.playlists[1] %>
+  12noon - 3pm<br /> <%= location.playlists[2] %>
+  3pm - 6pm<br /> <%= location.playlists[3] %>
+  6pm - 9pm<br /><br /> <%= location.playlists[4] %>
   <%= location.address %>, <%= location.state %> <br />
   <%= link_to 'Delete', location_path(location), method: :delete %>
 <% end %>

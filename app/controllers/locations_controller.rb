@@ -33,13 +33,22 @@ class LocationsController < ApplicationController
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find_by(id: params[:id])
     # @playlist = Playlist.new
-    @location.playlists.build
+    # @location.playlists.build
   end
 
   def update
+    # this is no longer in use... using edit action
     binding.pry
     @business = Business.find_by(id: session[:business_id])
-    @location = Location.find_by(id: params[:id])
+    @location = Location.find(params[:id])
+    @location.update(location_params)
+  end
+
+  def edit
+    @business = Business.find_by(id: session[:business_id])
+    @location = Location.find(params[:id])
+    @location.update(location_params)
+    redirect_to business_locations_path(@business)
   end
 
   def destroy
@@ -51,6 +60,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:name, :address, :state, :business_id)
+    params.require(:location).permit(:name, :address, :state, :business_id, :playlist_ids => [])
   end
+
 end

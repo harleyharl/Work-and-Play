@@ -1,17 +1,16 @@
 <h1><%= @location.name %></h1>
 
-<%= form_for @location do |f| %>
-  <%= f.fields_for :playlists do |p| %>
-    <h3>6am - 9am</h3>
-    <%= p.collection_select(:time_slot, @business.playlists.all, :id, :name) %>
-    <h3>9am - 12noon</h3>
-    <%= p.collection_select(:time_slot, @business.playlists.all, :id, :name) %>
-    <h3>12noon - 3pm</h3>
-    <%= p.collection_select(:time_slot, @business.playlists.all, :id, :name) %>
-    <h3>3pm - 6pm</h3>
-    <%= p.collection_select(:time_slot, @business.playlists.all, :id, :name) %>
-    <h3>6pm - 9pm</h3>
-    <%= p.collection_select(:time_slot, @business.playlists.all, :id, :name) %>
-  <% end %>
-<%= f.submit %>
+<%= form_tag(edit_location_path, method: :get) do %>
+  <h3>6am - 9am</h3>
+  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+  <h3>9am - 12noon</h3>
+  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+  <h3>12noon - 3pm</h3>
+  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+  <h3>3pm - 6pm</h3>
+  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+  <h3>6pm - 9pm</h3>
+  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+  <br />
+  <%= submit_tag "schedule playlists" %>
 <% end %>

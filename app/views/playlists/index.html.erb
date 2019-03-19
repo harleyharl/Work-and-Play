@@ -1,21 +1,16 @@
-<h1>Import a playlist:</h1>
 
-<% @business.playlists.each do |playlist|%>
- <%=playlist.name%><br />
+# my attempt with form_for didn't work... (this was the on locations show page before...)
 
-<% end %>
 <%= form_for @location do |f| %>
-  <%= f.fields_for :playlists do |p|
     <h3>6am - 9am</h3>
-    <%= p.collection_select(:time_slot, Playlist.all, :id, :name) %>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
     <h3>9am - 12noon</h3>
-    <%= p.collection_select(:time_slot, Playlist.all, :id, :name) %>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
     <h3>12noon - 3pm</h3>
-    <%= p.collection_select(:time_slot, Playlist.all, :id, :name) %>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
     <h3>3pm - 6pm</h3>
-    <%= p.collection_select(:time_slot, Playlist.all, :id, :name) %>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
     <h3>6pm - 9pm</h3>
-    <%= p.collection_select(:time_slot, Playlist.all, :id, :name) %>
-  <% end %>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
 <%= f.submit %>
 <% end %>
