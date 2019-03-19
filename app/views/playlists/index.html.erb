@@ -4,3 +4,17 @@
  <%=playlist.name%><br />
 
 <%end%>
+<%binding.pry%>
+<%= form_for ([@location, @location.playlists]) do |f| %>
+<h3>6am - 9am</h3>
+<%binding.pry%>
+<%= f.collection_select(:playlist_ids, Playlist.all, :id, :name) %>
+<h3>9am - 12noon</h3>
+
+<h3>12noon - 3pm</h3>
+
+<h3>3pm - 6pm</h3>
+
+<h3>6pm - 9pm</h3>
+<%= f.submit %>
+<%end%>

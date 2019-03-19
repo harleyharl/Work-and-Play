@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   end
 
   resources :locations do
-    resources :playlists, :only => [:show]
+    resources :playlists
   end
 
-  resources :playlists
+  # resources :playlists
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

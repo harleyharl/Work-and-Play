@@ -27,6 +27,7 @@ class LocationsController < ApplicationController
   def show
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find_by(id: params[:id])
+    @playlist = Playlist.new
   end
 
   def destroy
