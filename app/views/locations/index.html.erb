@@ -14,7 +14,7 @@
   <% @locations = @business.locations.where(state: params[:state]) %>
 <ul>
 <% @locations.each do |location| %>
-  <h3><li><%= link_to location.name, location_path(location) %></li></h3>
+  <h3><li><%= link_to location.name, edit_location_path(location) %></li></h3>
   <%= location.address %><br />
   <%= link_to 'Delete', location_path(location), method: :delete %>
 <% end %>
@@ -22,7 +22,7 @@
 <%else%>
 <ul>
 <% @business.locations.each do |location| %>
-  <h3><li><%= link_to location.name, location_path(location) %></li></h3>
+  <h3><li><%= link_to location.name, edit_location_path(location) %></li></h3>
   <h4>Playlist Schedule:</h4>
   6am - 9am<br /> <%= location.playlists[0] %>
   9am - 12noon<br /> <%= location.playlists[1] %>

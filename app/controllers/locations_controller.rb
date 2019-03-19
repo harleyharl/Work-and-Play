@@ -36,15 +36,14 @@ class LocationsController < ApplicationController
     # @location.playlists.build
   end
 
-  def update
-    # this is no longer in use... using edit action
-    binding.pry
+  def edit
     @business = Business.find_by(id: session[:business_id])
-    @location = Location.find(params[:id])
-    @location.update(location_params)
+    @location = Location.find_by(id: params[:id])
+    # @location.update(location_params)
+    # redirect_to business_locations_path(@business)
   end
 
-  def edit
+  def update
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find(params[:id])
     @location.update(location_params)
