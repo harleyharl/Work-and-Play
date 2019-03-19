@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
 
   def new
     @business = Business.find_by(id: session[:business_id])
-    # @location = Location.find_by(id: session[:location_id])
+    @location = Location.new
     # @location.playlists.build(time_slot: 1)
     # @location.playlists.build(time_slot: 2)
     # @location.playlists.build(time_slot: 3)

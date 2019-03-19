@@ -5,25 +5,21 @@ class BusinessesController < ApplicationController
       @business = Business.find_by(id: session[:business_id])
       redirect_to business_locations_path(@business)
     else
-      redirect_to new_session_path
+      redirect_to new_business_path
     end
   end
 
   def spotify_user
     # binding.pry
     spotify_user = RSpotify::User.new(request.env['omniauth.auth']) #stores user's spotify data as spotify_user
-    @business = Business.find_or_create_by(email_address: spotify_user.email) do |b| #finds or creates new business object using spotify id
-      # b.email_address = spotify_user.email #sets business' email as spotify email
-      b.name = spotify_user.display_name #sets business' name as spotify name
-      b.uid = spotify_user.id
-    end
-
+    @business = Business.find_or_create_by(email_address: spotify_user.email) #finds or creates new business object using spotify id
+    @business.uid = spotify_user.id
     spotify_user.playlists.each do |playlist| #begins iteration over each of spotify_user's playlist objects and
-      s_playlist = Playlist.new(name: playlist.name.to_s) #creates a new Playlist for each object
+      s_playlist = Playlist.find_or_create_by(name: playlist.name.to_s) #creates a new Playlist for each object
       s_playlist.business = @business #associates the Playlist with the business
       s_playlist.save #saves the Playlist object
         playlist.tracks.each do |track| #iterates over each track in the playlist
-          song = Song.new(name: track.name, artist: track.artists.first.name) #creates a new Song object for each track in the playlist
+          song = Song.find_or_create_by(name: track.name, artist: track.artists.first.name) #creates a new Song object for each track in the playlist
           song.playlist = s_playlist #saves the song in the newly created playlist object
           s_playlist.songs << song #saves the song in the newly created playlist object
           s_playlist.save #saves the playlist
