@@ -1,7 +1,0 @@
-
-<% if session[:business_id] %>
-  <h1><%= @business.name %></h1>
-  <h2>Email: <%= @business.email %></h2>
-<% else %>
-  <%= link_to('Log in with Spotify!', '/auth/spotify') %>
-<% end %>

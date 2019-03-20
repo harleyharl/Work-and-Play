@@ -9,6 +9,6 @@ class PlaylistsController < ApplicationController
 
   def show
     @business = Business.find_by(id: session[:business_id])
-    @playlist = Playlist.find_by(id: params[:playlist_id])
+    @playlist = Playlist.find_by(id: params[:id])
   end
 end

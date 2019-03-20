@@ -1,0 +1,9 @@
+<h1><%= @playlist.name %></h1>
+<ol>
+<% @playlist.songs.each do |song| %>
+ <li>
+   <%= song.artist %> - <%= song.name %><br />
+   <%= link_to('Remove', playlist_song_path(@playlist, song)) %>
+ </li>
+<% end %>
+</ol>
