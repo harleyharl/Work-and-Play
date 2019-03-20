@@ -18,8 +18,10 @@
 <%= form_for ([@business, @location]) do |f|%>
   <%= f.label(:name, "Location name:")%>
   <%= f.text_field :name %><br />
-  <%= f.label(:address, "Address:")%>
+  <%= f.label(:address, "Street address:")%>
   <%= f.text_area :address %><br />
+  <%= f.label(:state, "State:")%>
+  <%= f.select :state, options_for_select(us_states) %> <br />
   <%= f.hidden_field :business_id, value: @business.id %>
   <%= f.submit "Create New Location"%>
 <% end %>

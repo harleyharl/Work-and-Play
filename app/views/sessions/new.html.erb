@@ -1,0 +1,20 @@
+<h1>Log in to Work and Play:</h1>
+
+<% if flash[:notice] %>
+<%= flash[:notice] %>
+<% end %>
+
+<%= form_tag '/sessions' do |f| %>
+  <label>Email address</label>
+  <%= text_field_tag 'email_address' %><br />
+
+  <label>Password</label>
+  <%= password_field_tag 'password' %><br />
+
+<%= submit_tag "Sign In" %>
+<%end%>
+<br />
+
+<%= link_to('Log in with Spotify', '/auth/spotify') %><br /><br />
+
+If you don't have an account yet, <%= link_to('create your Work and Play account here', new_business_path) %>

@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_062259) do
-
-  create_table "LocationPlaylists", force: :cascade do |t|
-    t.integer "location_id"
-    t.integer "playlist_id"
-    t.time "string"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 2019_03_19_004716) do
 
   create_table "businesses", force: :cascade do |t|
     t.string "name"
     t.string "email_address"
     t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "uid"
+  end
+
+  create_table "location_playlists", force: :cascade do |t|
+    t.integer "location_id"
+    t.integer "playlist_id"
+    t.time "string"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -34,10 +35,37 @@ ActiveRecord::Schema.define(version: 2019_03_10_062259) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "business_id"
+    t.string "state"
   end
 
   create_table "playlists", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "business_id"
+    t.integer "time_slot"
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string "name"
+    t.string "artist"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "playlist_id"
+  end
+
+  create_table "spotify_users", force: :cascade do |t|
+    t.string "name"
+    t.string "email_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "uid"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

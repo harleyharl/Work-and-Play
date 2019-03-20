@@ -1,0 +1,19 @@
+<h1><%= @location.name %></h1>
+<% if @business.uid %>
+  <%= form_tag(location_path, method: :patch) do %>
+    <h3>6am - 9am</h3>
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <h3>9am - 12noon</h3>
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <h3>12noon - 3pm</h3>
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <h3>3pm - 6pm</h3>
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <h3>6pm - 9pm</h3>
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <br />
+    <%= submit_tag "schedule playlists" %>
+  <% end %>
+<% else %>
+  <%= link_to('Connect your spotify account to schedule playlists', '/auth/spotify') %>
+<% end %>

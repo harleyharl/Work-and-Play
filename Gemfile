@@ -3,7 +3,17 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.3.3'
 
+gem 'tux'
+
+gem 'hirb'
+
 gem 'pry'
+
+gem 'omniauth'
+
+gem 'omniauth-spotify'
+
+gem 'dotenv-rails'
 
 gem 'rspotify'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

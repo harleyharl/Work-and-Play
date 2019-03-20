@@ -1,0 +1,16 @@
+
+# my attempt with form_for didn't work... (this was the on locations show page before...)
+
+<%= form_for @location do |f| %>
+    <h3>6am - 9am</h3>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
+    <h3>9am - 12noon</h3>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
+    <h3>12noon - 3pm</h3>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
+    <h3>3pm - 6pm</h3>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
+    <h3>6pm - 9pm</h3>
+    <%= f.collection_select(:playlist_ids, @business.playlists.all, :id, :name) %>
+<%= f.submit %>
+<% end %>
