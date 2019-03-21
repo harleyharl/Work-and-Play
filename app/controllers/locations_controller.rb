@@ -24,6 +24,7 @@ class LocationsController < ApplicationController
   end
 
   def show
+    # binding.pry
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find_by(id: params[:id])
   end
@@ -37,7 +38,7 @@ class LocationsController < ApplicationController
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find(params[:id])
     @location.update(location_params)
-    redirect_to business_locations_path(@business)
+    redirect_to location_path(@location)
   end
 
   def destroy

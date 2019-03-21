@@ -57,4 +57,13 @@ module LocationsHelper
       ]
   end
 
+  def daily_playlist_schedule(location, playlist)
+    if location.playlists.count == 0
+    elsif location.playlists.count == 1
+    elsif location.playlists.count == 2
+    elsif location.playlists.count == 3
+    elsif location.playlists.count == 4
+    end
+  end
+
 end

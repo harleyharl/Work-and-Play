@@ -1,17 +1,24 @@
 <h1><%= @location.name %></h1>
-<% if @business.uid %>
-    <h3>6am - 9am</h3>
-    <%= link_to(@location.playlists[0].name, business_playlist_path(@business, @location.playlists[0])) %><br />
-    <h3>9am - 12noon</h3>
-    <%= @location.playlists[1].name %><br />
-    <h3>12noon - 3pm</h3>
-    <%= @location.playlists[2].name %><br />
-    <h3>3pm - 6pm</h3>
-    <%= @location.playlists[3].name %><br />
-    <h3>6pm - 9pm</h3>
-    <%= @location.playlists[4].name %><br />
-    <br />
-    <%= submit_tag "schedule playlists" %>
+
+<% if @business.uid && @location.playlists.count > 0 %>
+  <h4>Playlist Schedule:</h4>
+  6am - 9am<br />
+  <%= link_to(@location.playlists[0].name, location_playlist_path(@location, @location.playlists[0])) %><br />
+  9am - 12noon<br />
+  <%= link_to(@location.playlists[1].name, location_playlist_path(@location, @location.playlists[1])) %><br />
+  12noon - 3pm<br />
+  <%= link_to(@location.playlists[2].name, location_playlist_path(@location, @location.playlists[2])) %><br />
+  3pm - 6pm<br />
+  <%= link_to(@location.playlists[3].name, location_playlist_path(@location, @location.playlists[3])) %><br />
+  6pm - 9pm<br />
+  <%= link_to(@location.playlists[4].name, location_playlist_path(@location, @location.playlists[4])) %><br />
+  <%= link_to('Edit playlist schedule', edit_location_path(@location)) %><br />
+
+<% elsif @business.uid && @location.playlists.count == 0  %>
+  <%= link_to('Schedule some playlists here', edit_location_path(@location)) %><br />
+
 <% else %>
   <%= link_to('Connect your spotify account to schedule playlists', '/auth/spotify') %>
-<% end %>
+<% end %><br /><br />
+
+<%= link_to('All locations', business_locations_path(@business)) %>
