@@ -25,7 +25,6 @@ class BusinessesController < ApplicationController
           s_playlist.save #saves the playlist
         end
       end
-      # binding.pry
     @business.save
     session[:business_id] = @business.id
     redirect_to business_locations_path(@business)

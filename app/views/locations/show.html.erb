@@ -2,16 +2,14 @@
 
 <% if @business.uid && @location.playlists.count > 0 %>
   <h4>Playlist Schedule:</h4>
+  <p>
+    <%= daily_playlist_schedule(@location) %>
+  </p>
   6am - 9am<br />
-  <%= link_to(@location.playlists[0].name, location_playlist_path(@location, @location.playlists[0])) %><br />
   9am - 12noon<br />
-  <%= link_to(@location.playlists[1].name, location_playlist_path(@location, @location.playlists[1])) %><br />
   12noon - 3pm<br />
-  <%= link_to(@location.playlists[2].name, location_playlist_path(@location, @location.playlists[2])) %><br />
   3pm - 6pm<br />
-  <%= link_to(@location.playlists[3].name, location_playlist_path(@location, @location.playlists[3])) %><br />
   6pm - 9pm<br />
-  <%= link_to(@location.playlists[4].name, location_playlist_path(@location, @location.playlists[4])) %><br />
   <%= link_to('Edit playlist schedule', edit_location_path(@location)) %><br />
 
 <% elsif @business.uid && @location.playlists.count == 0  %>
