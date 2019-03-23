@@ -15,6 +15,6 @@
   <% end %>
   </ol>
   <p>
-    Want to change it up? You can <%= button_to('delete', location_playlist_path(@location, @playlist), method: :delete) %> this playlist or simply <%= link_to('schedule', edit_location_path(@location, @playlist)) %> a different one.
+    Want to change it up? Simply remove songs or <%= link_to('schedule', edit_location_path(@location, @playlist)) %> a different playlist.
   </p>
 <% end %>
