@@ -1,15 +1,9 @@
 <h1><%= @location.name %></h1>
 
 <% if @business.uid && @location.playlists.count > 0 %>
-  <h4>Playlist Schedule:</h4>
-  <p>
-    <%= daily_playlist_schedule(@location) %>
-  </p>
-  6am - 9am<br />
-  9am - 12noon<br />
-  12noon - 3pm<br />
-  3pm - 6pm<br />
-  6pm - 9pm<br />
+  <h4>Playlists on schedule:</h4>
+  <%= playlist_schedule(@location)  %><br />
+
   <%= link_to('Edit playlist schedule', edit_location_path(@location)) %><br />
 
 <% elsif @business.uid && @location.playlists.count == 0  %>

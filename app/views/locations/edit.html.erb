@@ -1,17 +1,24 @@
 <h1><%= @location.name %></h1>
 <% if @business.uid %>
   <%= form_tag(location_path, method: :patch) do %>
+
     <h3>6am - 9am</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {:prompt => "Please choose a playlist", :selected => Playlist.find_by(id: @location.playlists[0]).id.to_i }, {:name => 'location[playlist_ids][]'}%><br />
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[0]) ? Playlist.find_by(id: @location.playlists[0]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+
     <h3>9am - 12noon</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[1]).id.to_i }, {:name => 'location[playlist_ids][]' } %><br />
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[1]) ? Playlist.find_by(id: @location.playlists[1]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+
     <h3>12noon - 3pm</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[2]).id.to_i }, {:name => 'location[playlist_ids][]' } %><br />
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[2]) ? Playlist.find_by(id: @location.playlists[2]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+
     <h3>3pm - 6pm</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[3]).id.to_i }, {:name => 'location[playlist_ids][]' } %><br />
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[3]) ? Playlist.find_by(id: @location.playlists[3]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+
     <h3>6pm - 9pm</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[4]).id.to_i }, {:name => 'location[playlist_ids][]' } %><br />
+    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[4]) ? Playlist.find_by(id: @location.playlists[4]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+
     <br />
+
     <%= submit_tag "schedule playlists" %>
   <% end %>
 <% else %>

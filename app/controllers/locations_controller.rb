@@ -35,7 +35,6 @@ class LocationsController < ApplicationController
   end
 
   def update
-    # binding.pry
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find(params[:id])
     @location.update(location_params)
