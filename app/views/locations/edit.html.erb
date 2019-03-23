@@ -3,20 +3,19 @@
   <%= form_tag(location_path, method: :patch) do %>
 
     <h3>6am - 9am</h3>
-    render 'playlists/playlist_select'
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[0]) ? Playlist.find_by(id: @location.playlists[0]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[0] %>
 
     <h3>9am - 12noon</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[1]) ? Playlist.find_by(id: @location.playlists[1]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[1] %>
 
     <h3>12noon - 3pm</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[2]) ? Playlist.find_by(id: @location.playlists[2]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[2] %>
 
     <h3>3pm - 6pm</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[3]) ? Playlist.find_by(id: @location.playlists[3]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[3] %>
 
     <h3>6pm - 9pm</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: @location.playlists[4]) ? Playlist.find_by(id: @location.playlists[4]).id : nil }, {:name => 'location[playlist_ids][]'}%><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[4] %>
 
     <br />
 

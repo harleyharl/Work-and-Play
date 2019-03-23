@@ -6,6 +6,15 @@ class LocationsController < ApplicationController
     else
       redirect_to new_session_path
     end
+
+    if params[:state] == "All Locations"
+      @locations = @business.locations.all
+    elsif !params[:state].blank?
+      @locations = @business.locations.by_state(params[:state])
+    else
+      @locations = @business.locations.all
+    end
+
   end
 
   def new
