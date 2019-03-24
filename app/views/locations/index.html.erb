@@ -1,8 +1,9 @@
+<div class="container">
 <h1>Welcome to Work and Play</h1>
 
 
 <h2>Your Business locations:</h2>
-<div>
+<div class="container text-center">
   <h3>Filter locations by state:</h3>
   <%= form_tag("/locations", method: "get") do %>
     <%= select_tag :state, options_for_select(us_states_for_search), include_blank: true %>
@@ -21,3 +22,4 @@
 <%= link_to "Add a new location", new_location_path %><br />
 
 <%= link_to('Logout', logout_path, method: :delete)%>
+</div>

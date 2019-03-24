@@ -1,5 +1,6 @@
 <h2><%= @location.name %></h2>
 
+<div class="container text-center">
 <h3><%= @playlist.name %></h3>
 <ol>
 <% if @playlist.songs.count == 0 %>
@@ -18,3 +19,4 @@
     Want to change it up? Simply remove songs or <%= link_to('schedule', edit_location_path(@location, @playlist)) %> a different playlist.
   </p>
 <% end %>
+</div>
