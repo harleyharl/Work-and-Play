@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :business do
     resources :locations, :only => [:create, :index, :new, :show]
-    resources :playlists, :only => [:show]
+    resources :playlists, :only => [:show, :index]
   end
 
   resources :locations do

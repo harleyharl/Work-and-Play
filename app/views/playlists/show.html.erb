@@ -1,5 +1,3 @@
-<h2><%= @location.name %></h2>
-
 <div class="container text-center">
 <h3><%= @playlist.name %></h3>
 <ol>
@@ -15,8 +13,14 @@
    </li>
   <% end %>
   </ol>
+  <% if @location %>
   <p>
     Want to change it up? Simply remove songs or <%= link_to('schedule', edit_location_path(@location, @playlist)) %> a different playlist.
   </p>
-<% end %>
+  <% else %>
+  <p>
+    Don't like that song? Simply remove it!
+  </p>
+  <% end %>
+  <% end %>
 </div>

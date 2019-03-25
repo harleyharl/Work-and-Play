@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    # binding.pry
     if params[:email_address].blank?
       @business = Business.find_by(email_address: auth[:info][:email])
       session[:business_id] = @business.id
@@ -19,7 +20,7 @@ class SessionsController < ApplicationController
     elsif @business = Business.find_by(email_address: params[:email_address])
       @business.authenticate(params[:password])
       session[:business_id] = @business.id
-      redirect_to business_path(@business)
+      redirect_to business_locations_path(@business)
     else
       flash[:notice] = "You have entered the wrong email or password. Please try again or sign up for an account"
       render :new
