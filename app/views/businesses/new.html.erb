@@ -15,18 +15,16 @@
   </div>
 <% end %>
 
-<%= form_for @business do |f| %>
-
+<%= form_for @business, :html => {:class => "form-group"} do |f| %>
   <%= f.label(:name, "Business name:")%>
-  <%= f.text_field :name %><br />
+  <%= f.text_field :name, class: "form-control" %><br />
   <%= f.label(:email_address, "Email Address:")%>
-  <%= f.text_field :email_address %><br />
+  <%= f.text_field :email_address, class: "form-control" %><br />
   <%= f.label(:password, "Choose a password:")%>
-  <%= f.password_field :password %><br />
+  <%= f.password_field :password, class: "form-control" %><br />
   <%= f.label(:password_confirmation, "Confirm your password:")%>
-  <%= f.password_field :password_confirmation %><br />
-  <%= f.submit "Create Your Account:" %>
-
+  <%= f.password_field :password_confirmation, class: "form-control" %><br />
+  <%= f.submit "Create Your Account", class: "btn btn-default" %>
 <% end %>
 
 <br />

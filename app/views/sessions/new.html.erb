@@ -4,17 +4,18 @@
 <%= flash[:notice] %>
 <% end %>
 
-<%= form_tag '/sessions' do |f| %>
+<%= form_tag '/sessions', :class => "form-group" do |f| %>
   <label>Email address</label>
-  <%= text_field_tag 'email_address' %><br />
+  <%= text_field_tag 'email_address', nil, class: "form-control" %><br />
 
   <label>Password</label>
-  <%= password_field_tag 'password' %><br />
+  <%= password_field_tag 'password', nil, class: "form-control" %><br />
 
-<%= submit_tag "Sign In" %>
+<%= submit_tag "Sign In", class: "btn btn-default" %>
 <%end%>
-<br />
 
 <%= link_to('Log in with Spotify', '/auth/spotify') %><br /><br />
 
-If you don't have an account yet, <%= link_to('create your Work and Play account here', new_business_path) %>
+<p>
+  If you don't have an account yet, you can create it <%= link_to('here', new_business_path) %>
+</p>
