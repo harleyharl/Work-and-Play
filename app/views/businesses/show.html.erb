@@ -1,8 +1,10 @@
-<h1>Welcome to WorkandPlay, the background-music app for your business!</h1>
+<h1>Hello <%= @business.name %> </h1>
+
+<p>Welcome to WorkandPlay, the background-music app for your business!</p>
 
 <% if @business.locations.count == 0 %>
   <p>
-    To get started, <%= link_to("add your first location", new_business_location_path) %>
+    To get started, <%= link_to("add your first location", new_business_location_path(@business)) %>
   </p>
 <% else %>
   <p>

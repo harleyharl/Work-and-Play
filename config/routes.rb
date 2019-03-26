@@ -7,10 +7,12 @@ Rails.application.routes.draw do
 
   get '/auth/spotify/callback' => 'businesses#spotify_user'
 
-  resources :businesses
+  resources :businesses do
+    resources :locations, :only => [:create, :index, :new, :show, :destroy]
+  end
 
   resources :business do
-    resources :locations, :only => [:create, :index, :new, :show]
+    resources :locations, :only => [:create, :index, :new, :show, :destroy]
     resources :playlists, :only => [:show, :index]
   end
 

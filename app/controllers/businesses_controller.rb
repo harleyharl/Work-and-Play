@@ -19,7 +19,7 @@ class BusinessesController < ApplicationController
       s_playlist.business = @business #associates the Playlist with the business
       s_playlist.save #saves the Playlist object
         playlist.tracks.each do |track| #iterates over each track in the playlist
-          song = Song.find_or_create_by(name: track.name, artist: track.artists.first.name) #creates a new Song object for each track in the playlist
+          song = Song.find_or_create_by(name: track.name, artist: track.artists.first.name, tid: track.id) #creates a new Song object for each track in the playlist
           song.playlist = s_playlist #saves the song in the newly created playlist object
           s_playlist.songs << song #saves the song in the newly created playlist object
           s_playlist.save #saves the playlist

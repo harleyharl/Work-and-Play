@@ -18,6 +18,7 @@ class LocationsController < ApplicationController
   end
 
   def new
+    # binding.pry
     @business = Business.find_by(id: session[:business_id])
     @location = Location.new
   end

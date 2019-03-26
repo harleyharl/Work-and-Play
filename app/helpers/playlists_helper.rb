@@ -6,7 +6,7 @@ module PlaylistsHelper
 
   def playlist_schedule(location)
     location.playlists.each_with_index do |playlist, index|
-      concat(content_tag :h3, "#{playlist_times[index]}").concat(link_to(playlist.name, location_playlist_path(location, playlist))).concat(content_tag(:br))
+      concat(content_tag :h4, "#{playlist_times[index]}").concat(link_to(playlist.name, location_playlist_path(location, playlist))).concat(content_tag(:br))
     end.join("\n").html_safe
   end
 

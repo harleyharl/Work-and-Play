@@ -1,8 +1,7 @@
 <h1><%= @business.name %>'s Music</h1>
-<ul>
-<% @playlists.each do |playlist| %>
-  <li>
-    <%= link_to(playlist.name, business_playlist_path(@business, playlist)) %>
-  </li>
-<% end %>
+<div class = "container">
+  <% @playlists.each do |playlist| %>
+    <h3><%=link_to(playlist.name, business_playlist_path(@business, playlist))%></h3>
+  <% end %>
+</div>
 </ul>

@@ -13,4 +13,4 @@
   <%= link_to('Connect your spotify account to schedule playlists', '/auth/spotify') %>
 <% end %><br /><br />
 
-<%= link_to('All locations', business_locations_path(@business)) %>
+<%= button_to("Delete this location", business_location_path(@business, @location), method: :delete) %>

@@ -1,17 +1,15 @@
 <h3><%= @playlist.name %></h3>
-<ol>
 <% if @playlist.songs.count == 0 %>
   <p>
     Oh no! This playlist seems to be empty. You can <%= button_to('delete', location_playlist_path(@location, @playlist), method: :delete) %> this playlist or simply <%= link_to('schedule', edit_location_path(@location, @playlist)) %> a different one.
   </p>
 <% else %>
   <% @playlist.songs.each do |song| %>
-   <li>
+  <div class="container">
      <%= song.artist %> - <%= song.name %><br />
      <%= link_to('Remove', playlist_song_path(@playlist, song), method: :delete) %>
-   </li>
+  </div>
   <% end %>
-  </ol>
   <% if @location %>
   <p>
     Want to change it up? Simply remove songs or <%= link_to('schedule', edit_location_path(@location, @playlist)) %> a different playlist.
@@ -22,3 +20,4 @@
   </p>
   <% end %>
   <% end %>
+  <%=link_to("Back To Your Playlists", playlists_path) %>
