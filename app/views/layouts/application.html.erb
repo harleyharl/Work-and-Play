@@ -29,5 +29,16 @@
   <div class="container text-center">
     <%= yield %>
   </div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var randomColor1 = Math.floor(Math.random() * 255);
+      var randomColor2 = Math.floor(Math.random() * 255);
+      var randomColor3 = Math.floor(Math.random() * 255);
+      $('h1').on('click', function(){
+        $(this).css('color','rgb(' + randomColor1 + ',' + randomColor2 + ',' + randomColor3 + ')');
+      })
+    })
+  </script>
   </body>
 </html>
