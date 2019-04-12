@@ -1,5 +1,5 @@
 module ApplicationHelper
   def user_logged_in?
-    session[:business_id]
+    !session[:business_id].blank?
   end
 end

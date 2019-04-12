@@ -1,11 +1,18 @@
 class LocationsController < ApplicationController
 
   def index
-    if !session[:business_id].blank?
+    if helpers.user_logged_in?
       @business = Business.find_by(id: session[:business_id])
+        if params[:state] == "All Locations"
+          @locations = @business.locations.all
+        elsif !params[:state].blank?
+          @locations = @business.locations.by_state(params[:state])
+        else
+          @locations = @business.locations.all
+        end
     else
       redirect_to new_session_path
-    end
+  end
 
     if params[:state] == "All Locations"
       @locations = @business.locations.all

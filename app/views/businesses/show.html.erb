@@ -8,6 +8,6 @@
   </p>
 <% else %>
   <p>
-    Check out your <%= link_to("locations", business_locations_path(@business)) %> and <%= link_to("playlists", playlists_path) %>
+    Check out your <%= link_to("locations", business_locations_path(@business)) %> and <%= link_to("playlists", business_playlists_path(@business)) %>
   </p>
 <% end %>
