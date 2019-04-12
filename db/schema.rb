@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_004618) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "playlist_id"
+    t.string "tid"
     t.string "track_id"
   end
 
