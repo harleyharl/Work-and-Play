@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
   root to: 'businesses#index'
 
-  resources :sessions
+  get '/login', to: 'sessions#new'
 
   get 'logout' => 'sessions#destroy'
 
   get '/auth/spotify/callback' => 'businesses#spotify_user'
 
+  resources :locations do
+    resources :playlists, :only => [:show]
+  end
+
   resources :businesses do
     resources :locations, :only => [:create, :index, :new, :show, :destroy, :edit, :update]
     resources :playlists, :only => [:show, :index]
-  end
-
-  resources :locations do
-    resources :playlists, :only => [:create, :index, :new, :show, :destroy]
   end
 
   resources :playlists do

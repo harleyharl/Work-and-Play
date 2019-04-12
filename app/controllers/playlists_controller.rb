@@ -1,4 +1,6 @@
 class PlaylistsController < ApplicationController
+  before_action :require_login
+  
   def index
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find_by(id: params[:location_id])

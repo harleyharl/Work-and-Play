@@ -2,7 +2,7 @@
 
 <% if @business.uid && @location.playlists.count > 0 %>
   <h4>Playlists on schedule:</h4>
-  <%= playlist_schedule(@location)  %><br />
+  <%= playlist_schedule(@location) %><br />
 
   <%= link_to('Edit playlist schedule', edit_business_location_path(@business, @location)) %><br />
 

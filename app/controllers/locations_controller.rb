@@ -1,22 +1,18 @@
 class LocationsController < ApplicationController
+  before_action :require_login
 
   def index
-    if helpers.user_logged_in?
-      @business = Business.find_by(id: session[:business_id])
-        if params[:state] == "All Locations"
-          @locations = @business.locations.all
-        elsif !params[:state].blank?
-          @locations = @business.locations.by_state(params[:state])
-        else
-          @locations = @business.locations.all
-        end
-    else
-      redirect_to new_session_path
-    end
+    @business = Business.find_by(id: session[:business_id])
+      if params[:state] == "All Locations"
+        @locations = @business.locations.all
+      elsif !params[:state].blank?
+        @locations = @business.locations.by_state(params[:state])
+      else
+        @locations = @business.locations.all
+      end
   end
 
   def new
-    # binding.pry
     @business = Business.find_by(id: session[:business_id])
     @location = Location.new
   end
@@ -32,7 +28,6 @@ class LocationsController < ApplicationController
   end
 
   def show
-    # binding.pry
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find_by(id: params[:id])
   end

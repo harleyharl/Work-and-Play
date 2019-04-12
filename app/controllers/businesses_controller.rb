@@ -1,12 +1,10 @@
 class BusinessesController < ApplicationController
 
+  before_action :require_login, except: [:spotify_user, :new]
+
   def index
-    if helpers.user_logged_in?
-      @business = Business.find_by(id: session[:business_id])
-      redirect_to business_path(@business)
-    else
-      redirect_to new_business_path
-    end
+    @business = Business.find_by(id: session[:business_id])
+    redirect_to business_path(@business)
   end
 
   def spotify_user
@@ -44,12 +42,8 @@ class BusinessesController < ApplicationController
 
 
   def show
-    if helpers.user_logged_in?
-      @business = Business.find_by(id: session[:business_id])
-      @location = Location.new
-    else
-      redirect_to new_business_path
-    end
+    @business = Business.find_by(id: session[:business_id])
+    @location = Location.new
   end
 
   private
