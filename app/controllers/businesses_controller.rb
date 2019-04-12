@@ -42,7 +42,7 @@ class BusinessesController < ApplicationController
 
 
   def show
-    @business = Business.find_by(id: session[:business_id])
+    @business = Business.friendly.find_by(id: session[:business_id])
     @location = Location.new
   end
 
