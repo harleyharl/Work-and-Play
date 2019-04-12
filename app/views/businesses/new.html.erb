@@ -1,4 +1,4 @@
-<h1>Sign Up For Work n Play here:</h1>
+<h1>Sign Up For Work And Play here:</h1>
 
 <% if @business.errors.any? %>
   <div id="error_explanation">
@@ -15,21 +15,19 @@
   </div>
 <% end %>
 
-<%= form_for @business do |f| %>
-
+<%= form_for @business, :html => {:class => "form-group"} do |f| %>
   <%= f.label(:name, "Business name:")%>
-  <%= f.text_field :name %><br />
+  <%= f.text_field :name, class: "form-control" %><br />
   <%= f.label(:email_address, "Email Address:")%>
-  <%= f.text_field :email_address %><br />
+  <%= f.text_field :email_address, class: "form-control" %><br />
   <%= f.label(:password, "Choose a password:")%>
-  <%= f.password_field :password %><br />
+  <%= f.password_field :password, class: "form-control" %><br />
   <%= f.label(:password_confirmation, "Confirm your password:")%>
-  <%= f.password_field :password_confirmation %><br />
-  <%= f.submit "Create Your Account:" %>
-
+  <%= f.password_field :password_confirmation, class: "form-control" %><br />
+  <%= f.submit "Create Your Account", class: "btn btn-default" %>
 <% end %>
 
 <br />
 
 <%= link_to('Sign Up With Spotify', '/auth/spotify') %><br /><br />
-<%= link_to('Already have an account? Sign in here', new_session_path) %>
+<%= link_to('Already have an account? Sign in here', login_path) %>

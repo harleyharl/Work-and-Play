@@ -1,23 +1,18 @@
-<h1>Welcome to Work and Play</h1>
 
 
-<h2>Your Business locations:</h2>
-<div>
-  <h3>Filter locations by state:</h3>
-  <%= form_tag("/locations", method: "get") do %>
-    <%= select_tag :state, options_for_select(us_states_for_search), include_blank: true %>
-    <%= submit_tag "Filter" %>
-  <% end %>
-</div>
-
-<ul>
-<% @locations.each do |location| %>
-  <h3><li><%= link_to location.name, location_path(location) %></li></h3>
-  <%= location.address %>, <%= location.state %> <br />
-  <%= link_to 'Delete', location_path(location), method: :delete %>
+<p>Filter locations by state</p>
+<%= form_tag("/locations", method: "get") do %>
+  <%= select_tag :state, options_for_select(us_states_for_search), include_blank: true %>
+  <%= submit_tag "Filter" %>
 <% end %>
-</ul>
 
-<%= link_to "Add a new location", new_location_path %><br />
+<% @locations.each do |location| %>
+  <div>
+    <h3><%= link_to location.name, business_location_path(@business, location)%></h3>
+    <p>
+      <%= location.address %>, <%= location.state %>
+    </p>
+  </div>
+<% end %>
 
-<%= link_to('Logout', logout_path, method: :delete)%>
+<%= link_to "Add a new location", new_business_location_path(@business) %>

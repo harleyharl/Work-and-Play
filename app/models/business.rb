@@ -5,4 +5,7 @@ class Business < ApplicationRecord
   has_secure_password
   has_many :locations
   has_many :playlists
+
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 end

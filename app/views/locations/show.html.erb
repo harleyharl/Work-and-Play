@@ -2,15 +2,15 @@
 
 <% if @business.uid && @location.playlists.count > 0 %>
   <h4>Playlists on schedule:</h4>
-  <%= playlist_schedule(@location)  %><br />
+  <%= playlist_schedule(@location) %><br />
 
-  <%= link_to('Edit playlist schedule', edit_location_path(@location)) %><br />
+  <%= link_to('Edit playlist schedule', edit_business_location_path(@business, @location)) %><br />
 
 <% elsif @business.uid && @location.playlists.count == 0  %>
-  <%= link_to('Schedule some playlists here', edit_location_path(@location)) %><br />
+  <%= link_to('Schedule some playlists here', edit_business_location_path(@business, @location)) %><br />
 
 <% else %>
   <%= link_to('Connect your spotify account to schedule playlists', '/auth/spotify') %>
 <% end %><br /><br />
 
-<%= link_to('All locations', business_locations_path(@business)) %>
+<%= button_to("Delete this location", business_location_path(@business, @location), method: :delete) %>
