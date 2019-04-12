@@ -1,6 +1,6 @@
 class BusinessesController < ApplicationController
 
-  before_action :require_login, except: [:spotify_user, :new]
+  before_action :require_login, except: [:spotify_user, :new, :create]
 
   def index
     @business = Business.find_by(id: session[:business_id])

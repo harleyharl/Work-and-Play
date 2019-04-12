@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     if @business.id = session[:business_id]
       redirect_to business_path(@business)
     else
-      redirect_to new_session_path
+      redirect_to login_path
     end
   end
 

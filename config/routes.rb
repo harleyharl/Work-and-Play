@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   get 'logout' => 'sessions#destroy'
 
+  resources :sessions
+
   get '/auth/spotify/callback' => 'businesses#spotify_user'
+
+  # resources :sessions
 
   resources :locations do
     resources :playlists, :only => [:show]
@@ -20,9 +24,6 @@ Rails.application.routes.draw do
     resources :songs, :only => [:destroy]
   end
 
-  # resources :playlists
-
   get "/playlists/:playlist_id/songs/:song_id" => "songs#destroy"
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
