@@ -48,7 +48,7 @@ class LocationsController < ApplicationController
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find(params[:id])
     @location.update(location_params)
-    redirect_to location_path(@location)
+    redirect_to business_location_path(@business, @location)
   end
 
   def destroy

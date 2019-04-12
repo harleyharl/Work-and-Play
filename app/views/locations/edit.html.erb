@@ -1,6 +1,6 @@
 <h1><%= @location.name %></h1>
 <% if @business.uid %>
-  <%= form_tag(location_path, method: :patch) do %>
+  <%= form_tag(location_path(@location), method: :patch) do %>
 
     <h3>6am - 9am</h3>
     <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[0] %>
