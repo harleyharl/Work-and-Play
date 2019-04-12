@@ -1,2 +1,0 @@
-class SpotifyUser < ApplicationRecord
-end

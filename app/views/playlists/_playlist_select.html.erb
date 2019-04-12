@@ -1,0 +1,1 @@
+<%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, { :selected => Playlist.find_by(id: playlist_variable) ? Playlist.find_by(id: playlist_variable).id : nil }, {:name => 'location[playlist_ids][]'}%><br />

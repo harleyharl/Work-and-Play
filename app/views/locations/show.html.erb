@@ -1,16 +1,16 @@
 <h1><%= @location.name %></h1>
 
-<%= form_tag(edit_location_path, method: :get) do %>
-  <h3>6am - 9am</h3>
-  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
-  <h3>9am - 12noon</h3>
-  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
-  <h3>12noon - 3pm</h3>
-  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
-  <h3>3pm - 6pm</h3>
-  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
-  <h3>6pm - 9pm</h3>
-  <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
-  <br />
-  <%= submit_tag "schedule playlists" %>
-<% end %>
+<% if @business.uid && @location.playlists.count > 0 %>
+  <h4>Playlists on schedule:</h4>
+  <%= playlist_schedule(@location) %><br />
+
+  <%= link_to('Edit playlist schedule', edit_business_location_path(@business, @location)) %><br />
+
+<% elsif @business.uid && @location.playlists.count == 0  %>
+  <%= link_to('Schedule some playlists here', edit_business_location_path(@business, @location)) %><br />
+
+<% else %>
+  <%= link_to('Connect your spotify account to schedule playlists', '/auth/spotify') %>
+<% end %><br /><br />
+
+<%= button_to("Delete this location", business_location_path(@business, @location), method: :delete) %>

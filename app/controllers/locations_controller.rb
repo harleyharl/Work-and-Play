@@ -1,11 +1,15 @@
 class LocationsController < ApplicationController
+  before_action :require_login
 
   def index
-    if !session[:business_id].blank?
-      @business = Business.find_by(id: session[:business_id])
-    else
-      redirect_to new_session_path
-    end
+    @business = Business.find_by(id: session[:business_id])
+      if params[:state] == "All Locations"
+        @locations = @business.locations.all
+      elsif !params[:state].blank?
+        @locations = @business.locations.by_state(params[:state])
+      else
+        @locations = @business.locations.all
+      end
   end
 
   def new
@@ -37,7 +41,7 @@ class LocationsController < ApplicationController
     @business = Business.find_by(id: session[:business_id])
     @location = Location.find(params[:id])
     @location.update(location_params)
-    redirect_to business_locations_path(@business)
+    redirect_to business_location_path(@business, @location)
   end
 
   def destroy

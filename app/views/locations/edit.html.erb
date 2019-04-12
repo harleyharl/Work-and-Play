@@ -1,17 +1,24 @@
 <h1><%= @location.name %></h1>
 <% if @business.uid %>
-  <%= form_tag(location_path, method: :patch) do %>
+  <%= form_tag(business_location_path(@business, @location), method: :patch) do %>
+
     <h3>6am - 9am</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[0] %>
+
     <h3>9am - 12noon</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[1] %>
+
     <h3>12noon - 3pm</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[2] %>
+
     <h3>3pm - 6pm</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[3] %>
+
     <h3>6pm - 9pm</h3>
-    <%= collection_select :playlist_ids, :id, @business.playlists.all, :id, :name, {}, {:name => 'location[playlist_ids][]' } %><br />
+    <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[4] %>
+
     <br />
+
     <%= submit_tag "schedule playlists" %>
   <% end %>
 <% else %>
