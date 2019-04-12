@@ -1,7 +1,7 @@
 class BusinessesController < ApplicationController
 
   def index
-    if !session[:business_id].blank?
+    if helpers.user_logged_in?
       @business = Business.find_by(id: session[:business_id])
       redirect_to business_path(@business)
     else
@@ -44,8 +44,12 @@ class BusinessesController < ApplicationController
 
 
   def show
-    @business = Business.find_by(id: session[:business_id])
-    @location = Location.new
+    if helpers.user_logged_in?
+      @business = Business.find_by(id: session[:business_id])
+      @location = Location.new
+    else
+      redirect_to new_business_path
+    end
   end
 
   private
