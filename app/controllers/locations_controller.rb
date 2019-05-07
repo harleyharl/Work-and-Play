@@ -17,12 +17,11 @@ class LocationsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @location = Location.new(location_params)
     if @location.save
       redirect_to business_locations_path(@business)
     else
-      render :new
+      render :new #renders with error messages
     end
   end
 
@@ -49,7 +48,6 @@ class LocationsController < ApplicationController
   private
 
   def set_business
-    # binding.pry
     if params[:state]
       @business = Business.find_by(id: session[:business_id])
     elsif
