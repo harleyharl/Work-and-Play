@@ -8,18 +8,35 @@ class BusinessesController < ApplicationController
   end
 
   def spotify_user
-    spotify_user = RSpotify::User.new(auth) #stores user's spotify data as spotify_user
+    spotify_user = RSpotify::User.new(auth) #retreives spotify users info
 
-    @business = Business.find_or_create_by(email_address: spotify_user.email) do |b| #finds or creates new business object using spotify id
-      b.uid = spotify_user.id #sets uid as spotify user id so later i can extent this app to allow for playback
-      b.password = SecureRandom.urlsafe_base64 #generates a random password for spotify strategy
-      b.name = spotify_user.display_name #sets name
+    if !session[:business_id] && !Business.find_by(uid: spotify_user.id) #if user is not logged and doesn't have an account already
+      @business = Business.create(email_address: spotify_user.email) do |b| #creates new business object using spotify id
+        b.uid = spotify_user.id #sets uid as spotify user id so later i can extend this app to allow for playback
+        b.password = SecureRandom.urlsafe_base64 #generates a random password for spotify strategy
+        b.name = spotify_user.display_name #sets name
+      end
+      session[:business_id] = @business.id
+      build_playlists(@business)
+      @business.save
+      redirect_to business_path(@business)
+    elsif !session[:business_id] && Business.find_by(uid: spotify_user.id) #user not logged in but they do have a spotify account linked to worknplay
+      @business = Business.find_by(uid: spotify_user.id)
+      session[:business_id] = @business.id
+      redirect_to business_path(@business)
+    elsif Business.find_by(id: session[:business_id]).uid == nil #if no spotify account is connected yet to current account
+      if Business.find_by(uid: spotify_user.id)
+        flash[:notice] = "Sorry, it looks like another user is already using that spotify account. Be sure to log out of that spotify account in any of your current browser windows in order to proceed."
+        @business = Business.find_by(id: session[:business_id])
+        redirect_to business_playlists_path(@business)
+      else
+        @business = Business.find_by(id: session[:business_id])
+        @business.uid = spotify_user.id
+        build_playlists(@business)
+        @business.save
+        redirect_to business_playlists_path(@business)
+      end
     end
-
-    build_playlists(@business)
-    @business.save
-    session[:business_id] = @business.id
-    redirect_to business_path(@business)
   end
 
   def new
