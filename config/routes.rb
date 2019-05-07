@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+
   root to: 'businesses#index'
 
   get '/login', to: 'sessions#new'
 
   get 'logout' => 'sessions#destroy'
+
+  get 'badurl' => 'sessions#badurl'
 
   resources :sessions
 
@@ -23,5 +26,7 @@ Rails.application.routes.draw do
   end
 
   get "/playlists/:playlist_id/songs/:song_id" => "songs#destroy"
+
+  get '*path', to: redirect('/badurl')
 
 end
