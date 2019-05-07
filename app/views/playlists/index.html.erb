@@ -7,6 +7,7 @@
 </div>
 <% if @business.uid.blank? %>
 <div class = "container">
+  <%= flash[:notice] %><br /><br />
   <%= link_to('Connect your spotify account to import your playlists', '/auth/spotify') %>
 </div>
 <% end %>
