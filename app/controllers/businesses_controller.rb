@@ -3,8 +3,11 @@ class BusinessesController < ApplicationController
   before_action :require_login, except: [:spotify_user, :new, :create]
 
   def index
-    @business = Business.find_by(id: session[:business_id])
-    redirect_to business_path(@business)
+    if @business = Business.find_by(id: session[:business_id])
+      render :show
+    else
+      redirect_to badurl_path
+    end
   end
 
   def spotify_user
@@ -59,8 +62,12 @@ class BusinessesController < ApplicationController
 
 
   def show
-    @business = Business.friendly.find_by(id: session[:business_id])
-    @location = Location.new
+    if params[:business_id] == Business.find_by(id: session[:business_id]).id #ensures
+      @business = Business.find_by(id: session[:business_id])
+      @location = Location.new
+    else
+      redirect_to root_path
+    end
   end
 
   private
