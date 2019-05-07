@@ -1,24 +1,23 @@
 class LocationsController < ApplicationController
-  before_action :require_login
+  before_action :require_login, :set_business
 
   def index
-    @business = Business.find_by(id: session[:business_id])
-      if params[:state] == "All Locations"
-        @locations = @business.locations.all
-      elsif !params[:state].blank?
-        @locations = @business.locations.by_state(params[:state])
-      else
-        @locations = @business.locations.all
-      end
+    if params[:state] == "All Locations"
+      @locations = @business.locations.all
+    elsif !params[:state].blank?
+      @locations = @business.locations.by_state(params[:state])
+    else
+      @locations = @business.locations.all
+    end
   end
 
   def new
-    @business = Business.find_by(id: session[:business_id])
+    # binding.pry
     @location = Location.new
   end
 
   def create
-    @business = Business.find_by(id: session[:business_id])
+    # binding.pry
     @location = Location.new(location_params)
     if @location.save
       redirect_to business_locations_path(@business)
@@ -28,17 +27,14 @@ class LocationsController < ApplicationController
   end
 
   def show
-    @business = Business.find_by(id: session[:business_id])
     @location = Location.find_by(id: params[:id])
   end
 
   def edit
-    @business = Business.find_by(id: session[:business_id])
     @location = Location.find_by(id: params[:id])
   end
 
   def update
-    @business = Business.find_by(id: session[:business_id])
     @location = Location.find(params[:id])
     @location.update(location_params)
     redirect_to business_location_path(@business, @location)
@@ -51,6 +47,18 @@ class LocationsController < ApplicationController
   end
 
   private
+
+  def set_business
+    # binding.pry
+    if params[:state]
+      @business = Business.find_by(id: session[:business_id])
+    elsif
+      params[:business_id].to_i == session[:business_id]
+      @business = Business.find_by(id: params[:business_id])
+    else
+      redirect_to badurl_path
+    end
+  end
 
   def location_params
     params.require(:location).permit(:name, :address, :state, :business_id, :playlist_ids => [])
