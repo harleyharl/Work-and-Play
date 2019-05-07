@@ -12,35 +12,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # binding.pry
-    if params[:email_address].blank?
-      @business = Business.find_by(email_address: auth[:info][:email])
-      session[:business_id] = @business.id
-      redirect_to business_path(@business)
-    elsif @business = Business.find_by(email_address: params[:email_address])
-      @business.authenticate(params[:password])
-      session[:business_id] = @business.id
-      redirect_to business_locations_path(@business)
-    else
-      flash[:notice] = "You have entered the wrong email or password. Please try again or sign up for an account"
+    if params[:email_address].blank? || params[:password].blank?
+      flash[:notice] = "Looks like you've forgotten to enter your email address or password. Please try again or sign up for an account"
       render :new
+    elsif @business = Business.find_by(email_address: params[:email_address])
+      if @business.authenticate(params[:password])
+        session[:business_id] = @business.id
+        redirect_to business_locations_path(@business)
+      else
+        flash[:notice] = "You have entered the wrong email or password. Please try again or sign up for an account"
+        render :new
+      end
     end
   end
-
-  # def spotify
-  #   binding.pry
-  #   @business = Business.find_by(email_address: auth[:info][:email]) #email the user signed up with must match email they use with spotify!
-  #   session[:business_id] = @business.id
-  #
-  #   @spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
-  #   # @spotify_user.to_hash
-  #   ["birthdate","country","display_name","email","followers","images","product","external_urls","href","id","type","uri","credentials"]
-  #   # Then recover the Spotify user whenever you like
-  #   @spotify_user = RSpotify::User.new(hash)
-  #
-  #
-  #   redirect_to business_locations_path(@business)
-  # end
 
   def destroy
     reset_session
