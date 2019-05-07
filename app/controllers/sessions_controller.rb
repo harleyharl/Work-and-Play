@@ -36,7 +36,6 @@ class SessionsController < ApplicationController
   end
 
   def badurl
-    # binding.pry
     @business = session[:business_id]
     render :bad_url
   end
