@@ -5,8 +5,6 @@ ruby '2.3.3'
 
 gem 'friendly_id', '~> 5.2.4'
 
-gem 'jekyll-spotify'
-
 gem 'bootstrap', '~> 4.0.0.alpha3'
 
 gem 'jquery-rails'
