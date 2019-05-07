@@ -5,7 +5,11 @@ class Business < ApplicationRecord
   has_secure_password
   has_many :locations
   has_many :playlists
+  #
+  def to_param
+    "#{id} #{name}".parameterize
+  end
 
-  extend FriendlyId
-  friendly_id :name, use: :slugged
+  # extend FriendlyId
+  # friendly_id :name, use: :slugged
 end
