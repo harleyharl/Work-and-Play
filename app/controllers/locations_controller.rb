@@ -12,7 +12,6 @@ class LocationsController < ApplicationController
   end
 
   def new
-    # binding.pry
     @location = Location.new
   end
 
@@ -36,6 +35,7 @@ class LocationsController < ApplicationController
   def update
     @location = Location.find(params[:id])
     @location.update(location_params)
+    set_energy_levels(@location)
     redirect_to business_location_path(@business, @location)
   end
 
@@ -50,16 +50,26 @@ class LocationsController < ApplicationController
   def set_business
     if params[:state]
       @business = Business.find_by(id: session[:business_id])
-    elsif
-      params[:business_id].to_i == session[:business_id]
+    elsif params[:business_id].to_i == session[:business_id]
       @business = Business.find_by(id: params[:business_id])
     else
       redirect_to badurl_path
     end
   end
 
+  def set_energy_levels(location)
+    count = 0
+    LocationPlaylist.all.each do |locationplaylist|
+      if locationplaylist.location_id == location.id
+        locationplaylist.energy = eval("params[:energy_level#{count}]")
+        locationplaylist.save
+        count += 1
+      end
+    end
+  end
+
   def location_params
-    params.require(:location).permit(:name, :address, :state, :business_id, :playlist_ids => [])
+    params.require(:location).permit(:name, :address, :state, :business_id, :energy_level0, :energy_level1, :energy_level2, :energy_level3, :energy_level4, :playlist_ids => [])
   end
 
 end
