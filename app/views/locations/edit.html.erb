@@ -1,21 +1,28 @@
 <h1><%= @location.name %></h1>
+<p> Schedule your playlists and choose their energy levels for this location </p>
 <% if @business.uid %>
   <%= form_tag(business_location_path(@business, @location), method: :patch) do %>
 
     <h3>6am - 9am</h3>
     <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[0] %>
+    <%= render 'playlists/locationplaylist_energy_select', :location_playlist_index => 0 %>
+
 
     <h3>9am - 12noon</h3>
     <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[1] %>
+    <%= render 'playlists/locationplaylist_energy_select', :location_playlist_index => 1 %>
 
     <h3>12noon - 3pm</h3>
     <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[2] %>
+    <%= render 'playlists/locationplaylist_energy_select', :location_playlist_index => 2 %>
 
     <h3>3pm - 6pm</h3>
     <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[3] %>
+    <%= render 'playlists/locationplaylist_energy_select', :location_playlist_index => 3 %>
 
     <h3>6pm - 9pm</h3>
     <%= render 'playlists/playlist_select', :playlist_variable => @location.playlists[4] %>
+    <%= render 'playlists/locationplaylist_energy_select', :location_playlist_index => 4 %>
 
     <br />
 
