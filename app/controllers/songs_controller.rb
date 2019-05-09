@@ -13,4 +13,10 @@ class SongsController < ApplicationController
     @songs = Song.more_songs_by_artist("Mt. Eden")
   end
 
+  private
+
+  def set_business
+    @business = Business.find_by(id: session[:business_id])
+  end
+
 end
