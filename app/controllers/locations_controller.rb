@@ -57,7 +57,7 @@ class LocationsController < ApplicationController
     end
   end
 
-  def set_energy_levels(location)
+  def set_energy_levels(location) # this is really bad and should definitely be in the model
     count = 0
     LocationPlaylist.all.each do |locationplaylist|
       if locationplaylist.location_id == location.id
