@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
 
   def create
     # binding.pry
+    # refactor
     if params[:email_address].blank? || params[:password].blank?
       flash[:notice] = "Looks like you've forgotten to enter your email address or password. Please try again or sign up for an account"
       redirect_to login_path
