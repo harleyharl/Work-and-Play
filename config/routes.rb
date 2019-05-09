@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'logout' => 'sessions#destroy'
 
+  get '/moresongs' => 'songs#more_songs_by_artist'
+
   get 'badurl' => 'sessions#badurl'
 
   resources :sessions
