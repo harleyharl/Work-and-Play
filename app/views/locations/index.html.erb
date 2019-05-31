@@ -7,11 +7,10 @@
 <% end %>
 
 <% @locations.each do |location| %>
-  <div>
-    <h3><%= link_to location.name, business_location_path(@business, location)%></h3>
-    <p>
-      <%= location.address %>, <%= location.state %>
-    </p>
+  <div >
+    <h3><%= link_to location.name, business_location_path(@business, location), class: "location"%></h3>
+    <p><%= location.address %>, <%= location.state %></p>
+    <ul id="location-<%=location.id%>"></ul>
   </div>
 <% end %>
 
