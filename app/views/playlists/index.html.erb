@@ -2,7 +2,8 @@
 
 <div class = "container">
   <% @playlists.each do |playlist| %>
-    <h3><%=link_to(playlist.name, business_playlist_path(@business, playlist))%></h3>
+    <h3><%=link_to(playlist.name, business_playlist_path(@business, playlist), class: "playlist")%></h3>
+    <p id="playlist-<%= playlist.id %>"></p>
   <% end %>
 </div>
 <% if @business.uid.blank? %>
