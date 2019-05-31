@@ -4,10 +4,22 @@ class LocationsController < ApplicationController
   def index
     if params[:state] == "All Locations"
       @locations = @business.locations.all
+      respond_to do |f|
+        f.html
+        f.json {render json: @locations}
+      end
     elsif !params[:state].blank?
       @locations = @business.locations.by_state(params[:state])
+      respond_to do |f|
+        f.html
+        f.json {render json: @locations}
+      end
     else
       @locations = @business.locations.all
+      respond_to do |f|
+        f.html
+        f.json {render json: @locations}
+      end
     end
   end
 
@@ -26,6 +38,10 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find_by(id: params[:id])
+    respond_to do |f|
+      f.html
+      f.json {render json: @location}
+    end
   end
 
   def edit
