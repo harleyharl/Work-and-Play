@@ -1,4 +1,4 @@
-var businessDetails;
+var businessDetails; //probably need to change this 
 const timeSlots = ["6am-9am", "9am-12pm", "12pm-3pm", "3pm-6pm", "6pm-9pm"]
 let timeSlotIndex = 0
 
