@@ -1,25 +1,25 @@
 class LocationsController < ApplicationController
-  before_action :require_login, :set_business
+  before_action :require_login, :set_business, except: [:create]
 
   def index
     if params[:state] == "All Locations"
       @locations = @business.locations.all
-      respond_to do |f|
-        f.html
-        f.json {render json: @locations}
-      end
+      # respond_to do |f|
+      #   f.html
+      #   f.json {render json: @locations}
+      # end
     elsif !params[:state].blank?
       @locations = @business.locations.by_state(params[:state])
-      respond_to do |f|
-        f.html
-        f.json {render json: @locations}
-      end
+      # respond_to do |f|
+      #   f.html
+      #   f.json {render json: @locations}
+      # end
     else
       @locations = @business.locations.all
-      respond_to do |f|
-        f.html
-        f.json {render json: @locations}
-      end
+      # respond_to do |f|
+      #   f.html
+      #   f.json {render json: @locations}
+      # end
     end
   end
 
@@ -28,9 +28,11 @@ class LocationsController < ApplicationController
   end
 
   def create
+    # binding.pry
     @location = Location.new(location_params)
     if @location.save
-      redirect_to business_locations_path(@business)
+      # redirect_to business_locations_path(@business)
+      render json: @location
     else
       render :new #renders with error messages
     end
