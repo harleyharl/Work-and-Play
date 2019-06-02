@@ -1,4 +1,4 @@
-var businessDetails; //probably need to change this 
+var businessDetails; //probably need to change this
 const timeSlots = ["6am-9am", "9am-12pm", "12pm-3pm", "3pm-6pm", "6pm-9pm"]
 let timeSlotIndex = 0
 
@@ -22,9 +22,16 @@ $(() => {
   bindClickHandlers()
 })
 
+
 const bindClickHandlers = () => { //repaints the dom with my music playlists (just the titles)
   $(`#my-music`).on('click', e => {
+    // debugger
+    let business = new Business(businessDetails)
+    let url = e.currentTarget.href
+
     e.preventDefault()
+
+    history.pushState(null, null, url) // put the current in the first null position. this might cause problems if theres double digits of locations..use split instead
     fetch(`${e.target.href}.json`)
       .then(res => res.json())
       .then(playlists => {
@@ -39,6 +46,10 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
 
   $(`#app-container`).on('click', '.playlist', function(e) { //event delegation so these events can be fired from our re-painted dom
     e.preventDefault()
+    // let currentUrl = e.currentTarget.baseURI
+    // debugger
+    // history.pushState(currentUrl, null, `playlist/${e.target.href.slice(-1)}`) // put the current in the first null position. this might cause problems if theres double digits of locations..use split instead
+
     let business = new Business(businessDetails) //creates a new variable for the business
     fetch((`${e.target.origin}` + `/businesses/` + `${business.urlSlug()}` + `/playlists/${this.id[this.id.length -1]}.json`)) //builds out the url to fetch from for each playlist for the next fetch function to hook into
       .then(res => res.json())
@@ -53,7 +64,11 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
   })
 
   $(`.location`).on('click', e => { // repaints the dom with the locations index of playlists (this is the 'show requirement')
+  // debugger
     e.preventDefault()
+    let currentUrl = e.currentTarget.baseURI
+    // debugger
+    history.pushState(currentUrl, null, `location/${e.target.href.slice(-1)}`) // put the current in the first null position. this might cause problems if theres double digits of locations..use split instead. this one seems to work though
     fetch(`${e.target.href}.json`)
     .then(res => res.json())
     .then(location => {
@@ -83,6 +98,16 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
     })
   })
 
+  // $(`#work-and-play-button`).on(`click`, function(e) {
+  //   // debugger
+  //   currentUrl = e.currentTarget.href
+  //   history.pushState(currentUrl, null)
+  // })
+
+  $(window).on('popstate', function() {
+    // debugger
+    history.back()
+  });
 }
 
 function Playlist(playlist) {
