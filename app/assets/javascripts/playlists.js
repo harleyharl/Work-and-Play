@@ -24,6 +24,8 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
       .then(res => res.json())
       .then(playlists => {
         $(`#app-container`).html('')
+        let playlistPageHeader = "<h1>"+`${business.name}`+ "'s Music</h1>"
+        $(`#app-container`).append(playlistPageHeader)
         playlists.forEach(playlist => {
           let newPlaylist = (new Playlist(playlist))
           let playlistHtmlForMusicPage = newPlaylist.formatPlaylistForMusicPage()
@@ -42,7 +44,7 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
         playlist.songs.forEach(song => {
           let newSong = new Song(song)
           let songHtml = newSong.formatIndex()
-          $(`#playlist-${playlist.id}`).append(songHtml)
+          $(`#playlistlist-${playlist.id}`).append(songHtml)
         })
       })
   })
@@ -55,6 +57,8 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
     .then(res => res.json())
     .then(location => {
       $(`#app-container`).html('')
+      let locationPageHeader = `<h1>${location.name}</h1>`
+      $(`#app-container`).append(locationPageHeader)
       timeSlotIndex = 0
       location.playlists.forEach(playlist => {
         let newPlaylist = new Playlist(playlist)
@@ -63,11 +67,11 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
         timeSlotIndex++
       })
       $(`#app-container`).append(backToYourLocations)
+      $(`#app-container`).append(`<a href=${window.location.href}/edit>Edit this location</a>`)
     })
   })
 
   $(`#new_location`).on('submit', function(e) { //satisfies the form requirement
-    debugger
     e.preventDefault()
     serializedLocationValues = ($(this).serialize())// grabs values from form submit. 'this' is the form itself
     $.post('/locations', serializedLocationValues).done(function(data) {
@@ -98,17 +102,17 @@ function Playlist(playlist) {
 Playlist.prototype.formatPlaylistForMusicPage = function(){
   let playlistHtmlForMusicPage = `
 
-    <h1>${this.name}</h1>
+    <h3>${this.name}</h3>
 
     <a class="playlist" id="playlist-${this.id}" href="#"> click for details </a>
-
+    <div class="newclass" id="playlistlist-${this.id}"></div>
   `
   return playlistHtmlForMusicPage
 }
 
 Playlist.prototype.formatPlaylist = function() {
   let playlistHtml = `
-    <h1> ${this.name} </h1>
+    <h3> ${this.name} </h3>
     <p> ${timeSlots[timeSlotIndex]} </p>
   `
   return playlistHtml
@@ -118,9 +122,8 @@ Playlist.prototype.formatPlaylist = function() {
 let backToYourLocations = `
   <br>
   <br>
-  <a id="back" href='${window.location.pathname}'>See your other locations</a>
+  <a id="back" href='${window.location.pathname}'>See your other locations</a><br>
 `
-
 
 function Song(song) {
   this.id = song.id
