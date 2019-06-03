@@ -7,17 +7,6 @@ fetch(`${window.origin}/show_json.json`) // gets the user's details and saves th
   .then(res => res.json())
   .then(data => businessDetails = data)
 
-function Business(businessDetails){ //business class constructor
-  this.id = businessDetails.id
-  this.name = businessDetails.name
-}
-
-Business.prototype.urlSlug = function(){ //gets the businesses' base url *im never nesting my resources again....lesson learned
-  let name = businessDetails.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
-  let id = this.id
-  return(id + '-' + name)
-}
-
 $(() => {
   bindClickHandlers()
 })
@@ -25,7 +14,6 @@ $(() => {
 
 const bindClickHandlers = () => { //repaints the dom with my music playlists (just the titles)
   $(`#my-music`).on('click', e => {
-    // debugger
     let business = new Business(businessDetails)
     let url = e.currentTarget.href
 
@@ -46,10 +34,6 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
 
   $(`#app-container`).on('click', '.playlist', function(e) { //event delegation so these events can be fired from our re-painted dom
     e.preventDefault()
-    // let currentUrl = e.currentTarget.baseURI
-    // debugger
-    // history.pushState(currentUrl, null, `playlist/${e.target.href.slice(-1)}`) // put the current in the first null position. this might cause problems if theres double digits of locations..use split instead
-
     let business = new Business(businessDetails) //creates a new variable for the business
     fetch((`${e.target.origin}` + `/businesses/` + `${business.urlSlug()}` + `/playlists/${this.id[this.id.length -1]}.json`)) //builds out the url to fetch from for each playlist for the next fetch function to hook into
       .then(res => res.json())
@@ -64,11 +48,9 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
   })
 
   $(`.location`).on('click', e => { // repaints the dom with the locations index of playlists (this is the 'show requirement')
-  // debugger
     e.preventDefault()
     let currentUrl = e.currentTarget.baseURI
-    // debugger
-    history.pushState(currentUrl, null, `location/${e.target.href.slice(-1)}`) // put the current in the first null position. this might cause problems if theres double digits of locations..use split instead. this one seems to work though
+    history.pushState(null, null, `locations/${e.target.href.slice(-1)}`) // put the current in the first null position. this might cause problems if theres double digits of locations..use split instead. this one seems to work though
     fetch(`${e.target.href}.json`)
     .then(res => res.json())
     .then(location => {
@@ -85,29 +67,26 @@ const bindClickHandlers = () => { //repaints the dom with my music playlists (ju
   })
 
   $(`#new_location`).on('submit', function(e) { //satisfies the form requirement
+    debugger
     e.preventDefault()
     serializedLocationValues = ($(this).serialize())// grabs values from form submit. 'this' is the form itself
     $.post('/locations', serializedLocationValues).done(function(data) {
       $('#app-container').html('')
+      let business = new Business(businessDetails)
       const newLocation = new Location(data)
       const newLocationHtml = newLocation.formatLocation()
-
+      otherLocationsLink = `<a href=`+`${window.location.origin}`+`/businesses/`+`${business.urlSlug()}`+`/locations>See your other locations</a>`
+      // editLocationLink =  `<a href=`+`${window.location.origin}`+`/businesses/`+`${business.urlSlug()}`+`/locations/`+`${window.location.href.slice(-1)}`+`/edit`+`>Edit this location</a>`
       $('#app-container').html(newLocationHtml)
-      // $('#app-container').append(backToYourLocations) //removed because link doesn't work properly for this page
-
+      $('#app-container').append(otherLocationsLink)
+      // $('#app-container').append(editLocationLink)
     })
   })
 
-  // $(`#work-and-play-button`).on(`click`, function(e) {
-  //   // debugger
-  //   currentUrl = e.currentTarget.href
-  //   history.pushState(currentUrl, null)
-  // })
-
-  $(window).on('popstate', function() {
-    // debugger
-    history.back()
+  $(window).bind('popstate', function(){
+    window.location.href = window.location.href;
   });
+
 }
 
 function Playlist(playlist) {
@@ -170,4 +149,15 @@ Location.prototype.formatLocation = function(){
     <p>${this.address}, ${this.state}</p>
   `
   return locationHtml
+}
+
+function Business(businessDetails){ //business class constructor
+  this.id = businessDetails.id
+  this.name = businessDetails.name
+}
+
+Business.prototype.urlSlug = function(){ //gets the businesses' base url *im never nesting my resources again....lesson learned
+  let name = businessDetails.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+  let id = this.id
+  return(id + '-' + name)
 }
