@@ -1,6 +1,7 @@
 let businessDetails; //probably need to change this
 const timeSlots = ["6am-9am", "9am-12pm", "12pm-3pm", "3pm-6pm", "6pm-9pm"]
 let timeSlotIndex = 0
+let sortButton = `<a id="sort-playlists" href="">Sort Playlists</a>`
 
 fetch(`${window.origin}/show_json.json`) // gets the user's details and saves the into businessDetails variable
   .then(res => res.json())
@@ -19,6 +20,7 @@ const bindClickHandlers = () => { // attaches event listeners when executed
   paintPlaylistSongs()
   paintLocation()
   submitAndPaintNewLocation()
+  sortPlaylists()
 
 }
 
@@ -93,7 +95,7 @@ class Business {
   }
 }
 
-// other random bits and pieces
+// other bits and pieces
 
 if (window.location.hash && window.location.hash == '#_=_') { // handles the weird spotify / facebook redirect thing in my url bar
         window.location.hash = '';
@@ -122,6 +124,7 @@ paintPlaylists = function(idTag){
           let playlistHtmlForMusicPage = newPlaylist.formatPlaylistForMusicPage()
           $(`#app-container`).append(playlistHtmlForMusicPage)
         })
+        $(`#app-container`).append(sortButton)
       })
   })
 }
@@ -164,6 +167,42 @@ paintLocation = function(){
       $(`#app-container`).append(backToYourLocations)
       $(`#app-container`).append(`<a href=${window.location.href}/edit>Edit this location</a>`)
     })
+  })
+}
+
+sortPlaylists = function() {
+  $(`#app-container`).on('click', `#sort-playlists`, function(e) {
+    let business = new Business(businessDetails)
+    let url = e.currentTarget.href
+    e.preventDefault()
+    // history.pushState(null, null, url) // put the current in the first null position. this might cause problems if theres double digits of locations..use split instead
+    fetch(`${url}.json`)
+      .then(res => res.json())
+      .then(playlists => {
+        $(`#app-container`).html('')
+        let playlistPageHeader = "<h1>"+`${business.name}`+ "'s Music</h1>"
+        $(`#app-container`).append(playlistPageHeader)
+        // sort by name
+          playlists.sort(function(a, b) {
+            var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          });
+        playlists.forEach(playlist => {
+          let newPlaylist = (new Playlist(playlist))
+          let playlistHtmlForMusicPage = newPlaylist.formatPlaylistForMusicPage()
+          $(`#app-container`).append(playlistHtmlForMusicPage)
+        })
+        $(`#app-container`).append(sortButton)
+      })
+
+
   })
 }
 
