@@ -1,6 +1,6 @@
 # work-and-play
 
-![work-and-play](images/music-notes)
+![work-and-play](images/music-notes.jpg)
 
 A "background music" app that allows businesses to easily curate the workplace mood with music in multiple locations using built-in and imported playlists
 
