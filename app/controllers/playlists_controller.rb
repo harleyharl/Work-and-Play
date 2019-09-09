@@ -4,6 +4,10 @@ class PlaylistsController < ApplicationController
   def index
     @location = Location.find_by(id: params[:location_id])
     @playlists = @business.playlists.all
+    respond_to do |f|
+      f.html
+      f.json {render json: @playlists}
+    end
   end
 
 
@@ -14,6 +18,10 @@ class PlaylistsController < ApplicationController
       @playlist = Playlist.find_by(id: params[:id])
     else
       @playlist = Playlist.find_by(id: params[:id])
+      respond_to do |f|
+        f.html
+        f.json {render json: @playlist}
+      end
     end
   end
 

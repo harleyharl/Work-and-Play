@@ -70,6 +70,13 @@ class BusinessesController < ApplicationController
     end
   end
 
+  def show_json
+    @business = Business.find_by(id: session[:business_id])
+    respond_to do |f|
+      f.json {render json: @business}
+    end
+  end
+
   private
 
   def business_params

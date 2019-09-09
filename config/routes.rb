@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root to: 'businesses#index'
 
+  get '/show_json', to: 'businesses#show_json'
+
   get '/login', to: 'sessions#new'
 
   get 'logout' => 'sessions#destroy'

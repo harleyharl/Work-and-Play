@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  before_action :require_login, :set_business
+  before_action :require_login, :set_business, except: [:create]
 
   def index
     if params[:state] == "All Locations"
@@ -18,7 +18,7 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
     if @location.save
-      redirect_to business_locations_path(@business)
+      render json: @location
     else
       render :new #renders with error messages
     end
@@ -26,6 +26,10 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find_by(id: params[:id])
+    respond_to do |f|
+      f.html
+      f.json {render json: @location}
+    end
   end
 
   def edit
