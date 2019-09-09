@@ -1,5 +1,7 @@
 {
   "name": "workandplay",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "react": "^16.8.6"
+  }
 }
